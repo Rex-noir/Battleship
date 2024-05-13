@@ -14,7 +14,7 @@ export default class Ship {
       this.sunk = true;
     }
   }
-  isSunk(): boolean {
+  get isSunk(): boolean {
     return this.sunk;
   }
   get Length(): number {
