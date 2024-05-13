@@ -20,4 +20,7 @@ export default class Ship {
   get Length(): number {
     return this.length;
   }
+  get totalHit(): number {
+    return this.hits;
+  }
 }
