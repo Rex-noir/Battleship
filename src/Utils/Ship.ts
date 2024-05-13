@@ -10,7 +10,7 @@ export default class Ship {
   }
   hit(): void {
     this.hits++;
-    if (this.hits > this.length) {
+    if (this.hits >= this.length) {
       this.sunk = true;
     }
   }
