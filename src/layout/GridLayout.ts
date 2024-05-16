@@ -116,6 +116,7 @@ export function makeComputerCellsFunction(computer: Player) {
     const cells = boardContainer.querySelectorAll("#computer-cell");
     cells.forEach((cell) => {
       cell.addEventListener("click", (e) => computerCellClicked(e, computer));
+      cell.classList.add("hover:bg-[url('./../../assets/scope.svg')]");
     });
   }
 }
