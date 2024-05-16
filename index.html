@@ -4,9 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battle Ship</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+20+Charted&family=Protest+Riot&family=Sedan+SC&display=swap"
+    rel="stylesheet">
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="h-screen w-full bg-slate-700">
+    <div id="app" class="app-grid size-full">
+      <div id="header" class="text-center w-full">
+        <div id="title" class="text-8xl text-green-600 mt-5 font-jersey20 w-full">&nbsp;Battle Ship&nbsp;</div>
+      </div>
+      <div id="boards" class="flex flex-col row-start-2 sm:board-grid size-full">
+        <div id="player" class="col-start-1 text-center flex flex-col gap-1">
+          <div id="player-board-title" class="text-green-600 text-2xl font-sedanSC">Player</div>
+        </div>
+        <div id="middle-board-container"
+          class="col-start-2 place-content-center text-center text-sky-500 flex flex-col gap-4">
+          <div id="message" class="font-protestRiotRegular text-red-500 hover:text-green-600 text-xl hidden">Hello</div>
+          <div id="build-ship-wrapper" class="flex flex-col justify-center items-center gap-2">
+            <h3 class="text-pretty font-sedanSC text-4xl text-yellow-500 hidden" id="turns-message">&nbsp;Your
+              Turn&nbsp;
+            </h3>
+            <!--    Hidden for development purpose -->
+            <div id="before-game" class="flex flex-col justify-center items-center gap-2">
+              <label for="player-name-input" id="player-name-input-label" class="font-sedanSC text-2xl">Please
+                Enter your
+                name!</label>
+              <input type="text" name="player-name" id="player-name-input"
+                class="p-3 rounded-lg text-green-700 font-jersey20 text-4xl text-center focus-within:outline-none shadow-sm shadow-sky-300 max-w-[200px] bg-sky-200 ring-1"
+                autofocus>
+            </div>
+            <div id="during-game" class="hidden">
+              <table class="table-auto text-slate-300">
+                <tr class="table-row">
+                  <td id="ships-remaining-player">0</td>
+                  <th>Ships Remaining</th>
+                  <td id="ships-remaining-computer">0</td>
+                </tr>
+                <tr>
+                  <td id="total-missed-player">0</td>
+                  <th>Total Missed</th>
+                  <td id="total-missed-computer">0</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- hidden for development purpose -->
+          <button id="next"
+            class=" font-protestRiotRegular text-4xl text-green-600 hover:text-slate-200 active:text-sky-800 active:translate-y-1">Place
+            Ships</button>
+        </div>
+        <div id="computer" class="col-start-3 text-center flex flex-col gap-1">
+          <div id="computer-board-title" class="text-green-400 text-2xl font-sedanSC">Computer</div>
+        </div>
+      </div>
+      <div id="footer" class="text-yellow-300 text-center mt-8">
+        To read the descriptions and to look at the source codes, go to <a href="https://github.com/Rex-noir/Battleship"
+          target="_blank" rel="noopener noreferrer" class="text-sky-300 underline hover:text-green-700">This Repo</a>
+        <p class="text-slate-200">Developed by Ace following <span class="text-green-300">The Odin Project
+            Curriculum</span></p>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
