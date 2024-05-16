@@ -8,4 +8,5 @@ export default defineConfig({
     },
     testTimeout: 3000,
   },
+  base: "/Battleship/",
 });
