@@ -65,8 +65,9 @@ export default class GameBoard {
     if (found) return { x: x, y: y };
     return undefined;
   }
-  checkValid(x: number, y: number): boolean {
-    if (this.board[x][y] instanceof Ship) {
+  isClicked(x: number, y: number, id: string = "player"): boolean {
+    const cell = getCell(x, y, id);
+    if (cell && cell.getAttribute("clicked") === null) {
       return false;
     }
     return true;
