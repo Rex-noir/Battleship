@@ -124,17 +124,26 @@ function updateMissedCounts() {
   playerStat.textContent = String(computerData);
   computerStat.textContent = String(playerData);
 }
+//Previouse Hit recorder
+const nextHit: { x: number | undefined; y: number | undefined } = {x:undefined, y:undefined};
+//Avengers attack
 export function computerAttack() {
   const randomCoordinate = computer.BoardManager.getRandom();
-  const x = randomCoordinate?.x as number;
-  const y = randomCoordinate?.y as number;
-
+  const randomX = randomCoordinate?.x as number;
+  const randomY = randomCoordinate?.y as number;
+  let x = randomX;
+  let y = randomY;
+  //Calculating the squares next to each
+  if (checknextHit(nextHit)) {
+    x = nextHit.x as number;
+    y = nextHit.y as number;
+  }
   let cell;
   if (x !== undefined && y !== undefined) {
     cell = getCell(x, y);
   }
-  player.BoardManager.receiveAttack([x, y]);
-
+      updateNextHitPossibility(x, y);
+      player.BoardManager.receiveAttack([x, y]);
   if (player.Board[x][y] instanceof Ship) {
     cell?.classList.replace("bg-sky-600", "bg-red-600");
   } else if (cell?.getAttribute("clicked") !== "true") {
@@ -142,6 +151,15 @@ export function computerAttack() {
   }
   markClicked(x, y);
   updateTurns(true);
+}
+function checknextHit(hits: {
+  x: number | undefined;
+  y: number | undefined;
+}): boolean {
+  if (typeof hits.x === "number" && typeof hits.y === "number") {
+    return true;
+  }
+  return false;
 }
 export function getCell(
   x: number,
@@ -195,3 +213,38 @@ function announceWinner(winner: string = "player") {
   document.body.appendChild(dialog);
   dialog.showModal();
 }
+
+//to make the computer a lil bit smarter
+function updateNextHitPossibility(
+  x: number,
+  y: number,
+  id: string = "player"
+): void {
+  const board = id === "player" ? player.BoardManager : computer.BoardManager;
+  const possibilities = [
+    { x: x + 1, y: y },
+    { x: x - 1, y: y },
+    { x: x, y: y + 1 },
+    { x: x, y: y - 1 },
+  ];
+  for (const possiblity of possibilities) {
+    const Px = possiblity.x;
+    const Py = possiblity.y;
+    if (Px >= 0 && Px < 10 && Py >= 0 && Py < 10) {
+      const isClicked = board.isClicked(Px, Py);
+      const curent = board.getBoard[x][y];
+      if (
+        board.getBoard[Px][Py] instanceof Ship &&
+        isClicked === false &&
+        curent instanceof Ship
+      ) {
+        nextHit.x = Px;
+        nextHit.y = Py;
+        return;
+      }
+    }
+    nextHit.x = undefined;
+    nextHit.y = undefined;
+  }
+}
+
